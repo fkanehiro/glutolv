@@ -2,6 +2,7 @@
 #include "GLmodel.h"
 #include <hrpModel/ModelLoaderUtil.h>
 #include <GL/glut.h>
+#include <cstdio>
 
 using namespace OpenHRP;
 
