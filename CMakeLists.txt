@@ -17,3 +17,6 @@ set(target glutolv)
 add_executable(glutolv GLmodel.cpp OnlineViewer_impl.cpp glutolv.cpp)
 target_link_libraries(glutolv ${OPENHRP_LIBRARIES} ${OpenCV_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES})
 
+install(TARGETS ${target}
+  RUNTIME DESTINATION bin
+)
