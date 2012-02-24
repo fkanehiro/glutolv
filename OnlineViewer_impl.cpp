@@ -3,6 +3,7 @@
 #include <hrpModel/ModelLoaderUtil.h>
 #include <GL/glut.h>
 #include <cstdio>
+#include <semaphore.h>
 
 using namespace OpenHRP;
 
@@ -14,6 +15,7 @@ double aspect = 1.0;
 double pan=M_PI/4, tilt=M_PI/16, radius=5;
 int prevX, prevY, button=-1, modifiers;
 double xCenter=0, yCenter=0, zCenter=0.8;
+sem_t sem;
 
 void key(unsigned char c, int x, int y)
 {
@@ -41,6 +43,7 @@ void display()
         GLbody *body = new GLbody(binfo);
         scene->addBody(name, body);
         event &= 0xfffffffe;
+        sem_post(&sem);
     }
     
     glMatrixMode(GL_PROJECTION);
@@ -128,6 +131,7 @@ void glmain(int argc, char *argv[])
 {
     GLscene *scene = GLscene::getInstance();
 
+    sem_init(&sem, 0, 0);
     scene->init(argc, argv);
         
     glutDisplayFunc(display);
@@ -174,11 +178,12 @@ void OnlineViewer_impl::update(const WorldState& state)
 
 void OnlineViewer_impl::load(const char* name_, const char* url)
 {
-    if (!scene->findBody(name)){
+    if (!scene->findBody(name_)){
         std::cout << "load(" << url << ")" << std::endl;
         binfo = hrp::loadBodyInfo(url, orb);
         name = name_;
         event |= 1;
+        sem_wait(&sem); 
     }
 }
 
