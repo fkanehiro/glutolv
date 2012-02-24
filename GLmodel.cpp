@@ -137,7 +137,10 @@ GLlink::GLlink(const LinkInfo &i_li, BodyInfo_var i_binfo) : m_parent(NULL), m_j
         //std::cout << "length of normalIndices = " << normalIndices.length() << std::endl;
         const int numTriangles = triangles.length() / 3;
         //std::cout << "numTriangles = " << numTriangles << std::endl;
-        if (ai.materialIndex >= 0){ 
+        if (ai.colors.length()){
+            glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
+                         ai.colors.get_buffer());
+        }else if (ai.materialIndex >= 0){ 
             const MaterialInfo& mi = mis[ai.materialIndex];
             glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
                          mi.diffuseColor);
