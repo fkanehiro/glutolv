@@ -645,6 +645,8 @@ void GLscene::record()
 
 void GLscene::prev(int delta)
 {
+    if (!m_log.size()) return;
+
     m_index -= delta;
     if (m_index < 0) m_index = 0;
 }
