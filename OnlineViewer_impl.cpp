@@ -7,6 +7,7 @@
 
 using namespace OpenHRP;
 
+#define ADD_BODY 0x01
 // global variables
 int event=0;
 std::string name;
@@ -39,10 +40,10 @@ void display()
     //std::cout << "display" << std::endl;
     GLscene *scene = GLscene::getInstance();
 
-    if (event&1){
+    if (event&ADD_BODY){
         GLbody *body = new GLbody(binfo);
         scene->addBody(name, body);
-        event &= 0xfffffffe;
+        event &= ~ADD_BODY;
         sem_post(&sem);
     }
     
@@ -182,7 +183,7 @@ void OnlineViewer_impl::load(const char* name_, const char* url)
         std::cout << "load(" << url << ")" << std::endl;
         binfo = hrp::loadBodyInfo(url, orb);
         name = name_;
-        event |= 1;
+        event |= ADD_BODY;
         sem_wait(&sem); 
     }
 }
