@@ -1,4 +1,3 @@
-#include <GL/glu.h>
 #include "OnlineViewer_impl.h"
 #include "GLmodel.h"
 
