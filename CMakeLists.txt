@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules/)
 find_package(OpenHRP REQUIRED)
+include_directories(${OPENHRP_INCLUDE_DIRS})
 link_directories(${OPENHRP_LIBRARY_DIRS})
 add_definitions(${OPENHRP_DEFINITIONS})
 

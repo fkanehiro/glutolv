@@ -1,7 +1,7 @@
 set(OPENHRP_FOUND TRUE)
 
 execute_process(
-  COMMAND pkg-config --version openhrp3.1
+  COMMAND pkg-config --modversion openhrp3.1
   OUTPUT_VARIABLE OPENHRP_VERSION
   RESULT_VARIABLE RESULT
   OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -28,6 +28,18 @@ execute_process(
 
 if(RESULT EQUAL 0)
   string(REGEX MATCHALL "-D.*[^ ;]+" OPENHRP_DEFINITIONS ${OPENHRP_CXX_FLAGS})
+else()
+  set(OPENHRP_FOUND FALSE)
+endif()
+
+execute_process(
+  COMMAND pkg-config --cflags-only-I openhrp3.1
+  OUTPUT_VARIABLE OPENHRP_INCLUDE_DIRS
+  RESULT_VARIABLE RESULT
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+if(RESULT EQUAL 0)
+  string(REGEX REPLACE "-I" ";" OPENHRP_INCLUDE_DIRS ${OPENHRP_INCLUDE_DIRS})
 else()
   set(OPENHRP_FOUND FALSE)
 endif()
