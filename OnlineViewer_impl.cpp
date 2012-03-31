@@ -1,5 +1,6 @@
 #include "OnlineViewer_impl.h"
 #include "GLmodel.h"
+#include <iostream>
 #include <hrpModel/ModelLoaderUtil.h>
 #include <GL/glut.h>
 #include <cstdio>
