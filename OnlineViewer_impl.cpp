@@ -2,7 +2,11 @@
 #include "GLmodel.h"
 #include <iostream>
 #include <hrpModel/ModelLoaderUtil.h>
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
 #include <GL/glut.h>
+#endif
 #include <cstdio>
 #include <semaphore.h>
 

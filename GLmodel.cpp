@@ -1,7 +1,11 @@
 #include <cstdio>
 #include <iostream>
 #include <fstream>
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
 #include <GL/glut.h>
+#endif
 #include <sys/time.h>
 #include "GLmodel.h"
 
