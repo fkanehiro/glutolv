@@ -125,6 +125,15 @@ void motion(int x, int y)
 void special(int key, int x, int y)
 {
     modifiers = glutGetModifiers();
+    if (modifiers & GLUT_ACTIVE_CTRL){
+        if (key == GLUT_KEY_RIGHT){
+            GLscene::getInstance()->tail();
+        }else if (key == GLUT_KEY_LEFT){
+            GLscene::getInstance()->head();
+        }
+        return;
+    }
+
     int delta =  modifiers & GLUT_ACTIVE_SHIFT ? 10 : 1;
     if (key == GLUT_KEY_RIGHT){
         GLscene::getInstance()->next(delta);

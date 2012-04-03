@@ -100,6 +100,8 @@ public:
     void record();
     void prev(int delta=1);
     void next(int delta=1);
+    void head();
+    void tail();
     bool isNewStateAdded();
     bool isPlaying();
     bool isRecording();

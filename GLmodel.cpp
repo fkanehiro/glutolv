@@ -675,6 +675,17 @@ void GLscene::next(int delta)
     if (m_index >= (int)m_log.size()) m_index = m_log.size()-1;
 }
 
+void GLscene::head()
+{
+    m_index = 0;
+}
+
+void GLscene::tail()
+{
+    m_index = m_log.size()-1;
+    if (m_index < 0) m_index = 0;
+}
+
 bool GLscene::isPlaying()
 {
     return m_isPlaying;
